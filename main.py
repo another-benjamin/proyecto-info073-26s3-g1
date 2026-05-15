@@ -9,7 +9,8 @@ ESTADO_INICIO = "inicio"
 ESTADO_INSTRUCCIONES = "instrucciones"
 ESTADO_JUGANDO = "jugando"
 ESTADO_DERROTA = "derrota"
-ESTADO_VICTORIA = "victoria"
+ESTADO_VICTORIA = "victoriaaaaaa" 
+MAX_PASOS = 50
 
 # Rutas a la carpeta de imágenes de pantallas
 DIR_PANTALLAS = os.path.join(os.path.dirname(__file__), "data", "pantallas")
@@ -350,7 +351,8 @@ def main():
     tablero = []
     pos_jugador = (0, 0)
     direccion = (0, 0)
-    tiempo_ultimo_mov = 0
+    tiempo_ultimo_mov = 0 
+    pasos = 0
 
     mostrar_pantalla(screen, PANTALLA_INICIO)
 
