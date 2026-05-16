@@ -10,6 +10,7 @@ ESTADO_INSTRUCCIONES = "instrucciones"
 ESTADO_JUGANDO = "jugando"
 ESTADO_DERROTA = "derrota"
 ESTADO_VICTORIA = "victoria"
+MAX_PASOS = 50
 
 # Rutas a la carpeta de imágenes de pantallas
 DIR_PANTALLAS = os.path.join(os.path.dirname(__file__), "data", "pantallas")
@@ -351,6 +352,7 @@ def main():
     pos_jugador = (0, 0)
     direccion = (0, 0)
     tiempo_ultimo_mov = 0
+    pasos = 0
 
     mostrar_pantalla(screen, PANTALLA_INICIO)
 
@@ -368,6 +370,7 @@ def main():
                 if estado == ESTADO_INICIO:
                     if evento.key == pygame.K_SPACE:
                         tablero, pos_jugador = reiniciar()
+                        pasos= 0
                         direccion = (0, 0)
                         # Obtiene tiempo en milisegundos
                         tiempo_ultimo_mov = pygame.time.get_ticks()
@@ -384,6 +387,7 @@ def main():
                 elif estado in (ESTADO_DERROTA, ESTADO_VICTORIA):
                     if evento.key == pygame.K_r:
                         tablero, pos_jugador = reiniciar()
+                        pasos= 0
                         direccion = (0, 0)
                         tiempo_ultimo_mov = pygame.time.get_ticks()
                         estado = ESTADO_JUGANDO
@@ -412,7 +416,15 @@ def main():
                     mostrar_pantalla(screen, PANTALLA_VICTORIA)
                 else:
                     tiempo_ultimo_mov = tiempo_actual
-                    refrescar_tablero(screen, tablero)
+                    pasos +=1
+                    restantes = MAX_PASOS - pasos
+                    pygame.display.set_caption(f"juego - pasos restantes: {restantes}")
+                    
+                    if pasos >= MAX_PASOS:
+                        estado = ESTADO_DERROTA
+                        mostrar_pantalla(screen, PANTALLA_DERROTA)
+                    else:
+                        refrescar_tablero(screen, tablero)
 
     pygame.quit()
 
