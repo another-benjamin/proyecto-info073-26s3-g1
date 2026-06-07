@@ -10,6 +10,7 @@ ESTADO_INSTRUCCIONES = "instrucciones"
 ESTADO_JUGANDO = "jugando"
 ESTADO_DERROTA = "derrota"
 ESTADO_VICTORIA = "victoria"
+MAX_PASOS = 50
 
 # Rutas a la carpeta de imágenes de pantallas
 DIR_PANTALLAS = os.path.join(os.path.dirname(__file__), "data", "pantallas")
